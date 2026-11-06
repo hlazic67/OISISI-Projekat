@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Core.Interfaces;
+using System;
 using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
 
 namespace Core.Models
 {
     public enum TStatus { R, V }
-    public class Posetilac
+    public class Posetilac: ISerijalizacija
     {
 
         public string Ime { get; set; }
@@ -19,7 +18,7 @@ namespace Core.Models
 
         public string KontaktTelefon { get; set; }
 
-        public string E_mail { get; set;}
+        public string EMail { get; set;}
 
         public string BrojClanskeKarte { get; set; }
 
@@ -40,6 +39,45 @@ namespace Core.Models
             ListaZelja = new List<Knjiga>();
         }
 
+
+        public string[] ToCsv()
+        {
+
+            string[] csvValue =
+            {
+                Ime,
+                Prezime,
+                DatumRodjenja.ToString(),
+                Adresa.Id.ToString(),
+                KontaktTelefon,
+                EMail,
+                BrojClanskeKarte,
+                TrenutnaGodinaClanstva.ToString(),
+                Status.ToString(),
+                ProsecnaOcenaRecenzija.ToString(),
+
+            };
+            return csvValue;
+
+        }
+
+        public void FromCSV(string[] values, List<Adresa> adrese)
+        {
+            Ime= values[0];
+            Prezime= values[1];
+            DatumRodjenja=DateTime.Parse(values[2]);
+
+            int adresaId = int.Parse(values[3]);
+            Adresa = adrese.Find(a => a.Id == adresaId);
+
+            KontaktTelefon = values[4];
+            EMail= values[5];
+            BrojClanskeKarte= values[6];
+            TrenutnaGodinaClanstva=int.Parse(values[7]);
+            Status=Enum.Parse<TStatus>(values[8]);
+            ProsecnaOcenaRecenzija=double.Parse(values[9]);
+
+        }
 
 
     }
