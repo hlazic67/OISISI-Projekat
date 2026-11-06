@@ -13,7 +13,7 @@ namespace Core.Models
         public double Cena { get; set; }
         public int BrojStrana { get; set; }
         public List<Autor> Autori { get; set; }
-        public Izdavac Izdavac { get; set; }
+       // public Izdavac Izdavac { get; set; }
         public string IzdavacSifra { get; set; }
 
     }
