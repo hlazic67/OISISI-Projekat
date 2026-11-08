@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Runtime.Serialization;
@@ -6,7 +7,7 @@ using System.Text;
 
 namespace Core.Models
 {
-    public class Adresa
+    public class Adresa : ISerijalizacija
     {
         public int Id { get; set; }
         public string Ulica { get; set; }
