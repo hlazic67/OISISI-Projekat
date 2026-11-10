@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Core.Models
 {
@@ -29,8 +30,19 @@ namespace Core.Models
         
         }
 
+        public Izdavac(int sifra, string naziv, Autor sefIzdavaca, int sefID)
+        {
+            Sifra = sifra;
+            Naziv = naziv;
+            SefIzdavaca = sefIzdavaca;
+            SpisakAutora = new List<Autor>();
+            SpisakKnjiga = new List<Knjiga>();
+            SefID = sefID;
+        }
+
         public string[] ToCSV()
         {
+          
             string[] csvValue =
             {
                 Sifra.ToString(),
@@ -47,6 +59,9 @@ namespace Core.Models
             Sifra = int.Parse(values[0]);
             Naziv = values[1];
             SefID = int.Parse(values[2]);
+            SpisakAutora = new List<Autor>();
+            SpisakKnjiga = new List<Knjiga>();
+            SefIzdavaca = null;
 
         }
 
