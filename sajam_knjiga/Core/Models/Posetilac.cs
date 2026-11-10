@@ -72,6 +72,10 @@ namespace Core.Models
                 Prezime,
                 DatumRodjenja.ToString("yyyy-MM-dd"),
                 AdresaId.ToString(),
+                Adresa?.Ulica ?? string.Empty,
+                Adresa?.Broj ?? string.Empty,
+                Adresa?.Drzava ?? string.Empty,
+                Adresa?.Grad ?? string.Empty,
                 KontaktTelefon,
                 EMail,
                 BrojClanskeKarte,
@@ -90,12 +94,13 @@ namespace Core.Models
             Prezime= values[1];
             DatumRodjenja = DateOnly.ParseExact(values[2], "yyyy-MM-dd"); 
             AdresaId =int.Parse(values[3]);
-            KontaktTelefon = values[4];
-            EMail= values[5];
-            BrojClanskeKarte= values[6];
-            TrenutnaGodinaClanstva=int.Parse(values[7]);
-            Status=Enum.Parse<TStatus>(values[8]);
-            ProsecnaOcenaRecenzija=double.Parse(values[9], System.Globalization.CultureInfo.InvariantCulture);
+            Adresa = new Adresa(AdresaId,values[4],values[5], values[6],values[7]);
+            KontaktTelefon = values[8];
+            EMail= values[9];
+            BrojClanskeKarte= values[10];
+            TrenutnaGodinaClanstva=int.Parse(values[11]);
+            Status=Enum.Parse<TStatus>(values[12]);
+            ProsecnaOcenaRecenzija=double.Parse(values[13], System.Globalization.CultureInfo.InvariantCulture);
             ListaZelja = new List<Knjiga>();
             SpisakKupljenihKnjiga = new List<Kupovina>();
 
@@ -104,16 +109,16 @@ namespace Core.Models
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"Ime: {Ime}, ");
-            sb.AppendLine($"Prezime: {Prezime}, ");
-            sb.AppendLine($"Datum rodjenja: {DatumRodjenja}, ");
-            sb.AppendLine($"Adresa: {Adresa}, ");
-            sb.Append($"Telefon: {KontaktTelefon}, ");
-            sb.Append($"E-Mail: {   EMail}, ");
-            sb.Append($"Broj clanske karte: {BrojClanskeKarte}, ");
-            sb.Append($"Trenutna godina clanstva: {TrenutnaGodinaClanstva}, ");
-            sb.Append($"Status: {Status}, ");
-            sb.Append($"Prosecna ocena recenzija: {ProsecnaOcenaRecenzija}, ");
+            sb.AppendLine($"Ime: {Ime} ");
+            sb.AppendLine($"Prezime: {Prezime} ");
+            sb.AppendLine($"Datum rodjenja: {DatumRodjenja} ");
+            sb.AppendLine($"Adresa: {Adresa}");
+            sb.AppendLine($"Telefon: {KontaktTelefon} ");
+            sb.AppendLine($"E-Mail: {EMail}");
+            sb.AppendLine($"Broj clanske karte: {BrojClanskeKarte} ");
+            sb.AppendLine($"Trenutna godina clanstva: {TrenutnaGodinaClanstva} ");
+            sb.AppendLine($"Status: {Status}");
+            sb.AppendLine($"Prosecna ocena recenzija: {ProsecnaOcenaRecenzija} ");
 
             return sb.ToString();
         }

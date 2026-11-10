@@ -1,12 +1,20 @@
-﻿using Core.Models;
+﻿using Core.DAO;
+using Core.Models;
 using Core.Services;
+using SajamKnjiga.ConsoleUI;
 
 namespace ConsoleClient;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        System.Console.WriteLine("Sajam knjiga");
+        PosetilacDAO posetilac = new PosetilacDAO();
+        KupovinaDAO kupovina = new KupovinaDAO();
+        IzdavacDAO izdavac = new IzdavacDAO();
+
+        SajamConsoleView view = new SajamConsoleView(posetilac,kupovina,izdavac);
+
+        view.RunMenu();
     }
 }
