@@ -31,7 +31,6 @@ namespace Core.DAO
         }
 
 
-
         public Posetilac DodajPosetioca(Posetilac posetilac)
         {
             posetilac.BrojClanskeKarte = KreirajBrojClanskeKarte();
