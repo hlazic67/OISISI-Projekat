@@ -38,7 +38,7 @@ namespace Core.DAO
             return staraAdresa;
         }
 
-        public Adresa? UkloniAdresi(int id)
+        public Adresa? UkloniAdresu(int id)
         {
             Adresa? adresa = GetAdresaById(id);
 
