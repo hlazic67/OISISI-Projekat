@@ -99,9 +99,9 @@ namespace Core.Models
             StringBuilder sb = new StringBuilder();
             sb.Append($"Broj clanske karte posetioca: {PosetilacBrojClanskeKarte}, ");
             sb.Append($"ISBN knjige: {KnjigaISBN}, ");
-            sb.Append($"Datum kupovine: {DatumKupovine}, ");
+            sb.Append($"Datum kupovine: {DatumKupovine.ToString("yyyy-MM-dd")}, ");
             sb.Append($"Ocena: {Ocena}, ");
-            sb.Append($"Komentar: {Komentar}, ");
+            sb.Append($"Komentar: {Komentar} ");
 
             return sb.ToString();
         }
