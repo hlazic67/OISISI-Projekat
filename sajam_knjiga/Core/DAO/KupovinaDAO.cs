@@ -58,6 +58,11 @@ namespace Core.DAO
             return kupovina;
         }
 
+        public List<Kupovina> GetKupovinePosetioca(string brojClanskeKarte)
+        {
+            return _kupovine.Where(k => k.PosetilacBrojClanskeKarte == brojClanskeKarte).ToList();
+        }
+
         public List<Kupovina> GetAllKupovine()
         {
             return _kupovine;

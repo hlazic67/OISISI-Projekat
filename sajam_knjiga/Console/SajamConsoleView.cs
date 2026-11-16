@@ -13,11 +13,14 @@ class SajamConsoleView
     private readonly KupovinaDAO _kupovinaDAO;
     private readonly IzdavacDAO _izdavacDAO;
 
-    public SajamConsoleView(PosetilacDAO posetilacDAO,KupovinaDAO kupovinaDAO,IzdavacDAO izdavacDAO)
+    private readonly KnjigaDAO _knjigaDAO;
+
+    public SajamConsoleView(PosetilacDAO posetilacDAO,KupovinaDAO kupovinaDAO,IzdavacDAO izdavacDAO, KnjigaDAO knjigaDAO)
     {
         _posetilacDAO = posetilacDAO;
         _kupovinaDAO = kupovinaDAO;
         _izdavacDAO = izdavacDAO;
+        _knjigaDAO = knjigaDAO;
     }
 
     public void RunMenu() //metoda preuzeta iz materijala za Vjezbe 3
@@ -46,6 +49,7 @@ class SajamConsoleView
         System.Console.WriteLine("10: Brisanje posetioca");
         System.Console.WriteLine("11: Brisanje kupovine");
         System.Console.WriteLine("12: Brisanje izdavaca");
+        System.Console.WriteLine("13. Dodavanje knjige na listu zelja");
         System.Console.WriteLine("0: Izlaz");
     }
 
@@ -102,6 +106,10 @@ class SajamConsoleView
                 UkloniIzdavaca();
                 break;
 
+            case "13":
+                DodajKnjiguNaListuZelja();
+                break;
+
             default:
                 Console.WriteLine("Nepostojeca opcija!");
                 break;
@@ -115,6 +123,26 @@ class SajamConsoleView
         foreach (Posetilac p in _posetilacDAO.GetAllPosetioci())
         {
             Console.WriteLine(p);
+            Console.WriteLine("Spisak kupljenih knjiga:");
+            List<Kupovina> kupovine = _kupovinaDAO.GetAllKupovine().Where(k => k.PosetilacBrojClanskeKarte == p.BrojClanskeKarte).ToList();
+
+            foreach (Kupovina k in kupovine)
+            {
+                Knjiga? knjiga = _knjigaDAO.GetKnjigaByIsbn(k.KnjigaISBN);
+
+                if (knjiga != null)
+                 Console.WriteLine(knjiga.Naziv);
+            }
+
+            Console.WriteLine("\nLista želja:");
+
+            foreach (Knjiga zknjiga in p.ListaZelja)
+            {
+                Knjiga? knjiga = _knjigaDAO.GetKnjigaByIsbn(zknjiga.ISBN);
+
+                if (knjiga != null)
+                Console.WriteLine(knjiga.Naziv);
+            }
             Console.WriteLine("-------------------------");
         }
     }
@@ -125,6 +153,16 @@ class SajamConsoleView
 
         foreach (Kupovina k in _kupovinaDAO.GetAllKupovine())
         {
+
+            Posetilac? posetilac = _posetilacDAO.GetAllPosetioci().Find(p => p.BrojClanskeKarte == k.PosetilacBrojClanskeKarte);
+            Knjiga? knjiga = _knjigaDAO.GetKnjigaByIsbn(k.KnjigaISBN);
+
+            if (posetilac != null)
+                Console.WriteLine($"Posetilac: {posetilac.Ime} {posetilac.Prezime}");
+
+            if (knjiga != null)
+                Console.WriteLine($"Knjiga: {knjiga.Naziv}");
+
             Console.WriteLine(k);
             Console.WriteLine("-------------------------");
         }
@@ -234,6 +272,24 @@ class SajamConsoleView
 
         System.Console.WriteLine("Posetilac je uspesno obrisan.");
     }
+
+    private void DodajKnjiguNaListuZelja()
+    {
+        Console.WriteLine("Unesite broj clanske karte:");
+        string brojClanskeKarte = Console.ReadLine() ?? "";
+
+        Console.WriteLine("Unesite ISBN knjige:");
+        string isbn = Console.ReadLine() ?? "";
+
+        bool uspjesno = _posetilacDAO.DodajKnjiguNaListuZelja(
+            brojClanskeKarte, isbn, _knjigaDAO);
+
+        if (uspjesno)
+            Console.WriteLine("Knjiga je dodata na listu zelja.");
+        else
+            Console.WriteLine("Nije moguce dodati knjigu. Provjerite broj clanske karte i ISBN.");
+    }
+
 
     //kupovina
     private void DodajKupovinu()

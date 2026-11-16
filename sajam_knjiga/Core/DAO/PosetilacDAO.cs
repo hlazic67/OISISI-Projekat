@@ -74,6 +74,21 @@ namespace Core.DAO
             return posetilac;
         }
 
+        public bool DodajKnjiguNaListuZelja(string brojClanskeKarte, string isbn, KnjigaDAO knjigaDAO)
+        {
+            Posetilac? posetilac = GetPosetilacByBrojClanskeKarte(brojClanskeKarte);
+            if (posetilac == null)  return false;
+
+            Knjiga? knjiga = knjigaDAO.GetKnjigaByIsbn(isbn);
+            if (knjiga == null) return false;
+
+            if (posetilac.ListaZelja.Any(k => k.ISBN == isbn)) return false;
+
+            posetilac.ListaZelja.Add(knjiga);
+            _storage.Save(posetioci);
+            return true;
+        }
+
         private Posetilac? GetPosetilacByBrojClanskeKarte(string brojClanskeKarte)
         {
             return posetioci.Find(p => p.BrojClanskeKarte == brojClanskeKarte);

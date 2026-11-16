@@ -82,6 +82,7 @@ namespace Core.Models
                 TrenutnaGodinaClanstva.ToString(),
                 Status.ToString(),
                 ProsecnaOcenaRecenzija.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                string.Join(";", ListaZelja.Select(k => k.ISBN))
 
             };
             return csvValue;
@@ -102,7 +103,15 @@ namespace Core.Models
             Status=Enum.Parse<TStatus>(values[12]);
             ProsecnaOcenaRecenzija=double.Parse(values[13], System.Globalization.CultureInfo.InvariantCulture);
             ListaZelja = new List<Knjiga>();
+            if (values.Length > 14 && values[14] != "")
+            {
+                foreach (string isbn in values[14].Split(';'))
+                {
+                    ListaZelja.Add(new Knjiga { ISBN = isbn });
+                }
+            }
             SpisakKupljenihKnjiga = new List<Kupovina>();
+
 
         }
 
@@ -111,7 +120,7 @@ namespace Core.Models
             StringBuilder sb = new StringBuilder();
             sb.AppendLine($"Ime: {Ime} ");
             sb.AppendLine($"Prezime: {Prezime} ");
-            sb.AppendLine($"Datum rodjenja: {DatumRodjenja} ");
+            sb.AppendLine($"Datum rodjenja: {DatumRodjenja.ToString("yyyy-MM-dd")} ");
             sb.AppendLine($"Adresa: {Adresa}");
             sb.AppendLine($"Telefon: {KontaktTelefon} ");
             sb.AppendLine($"E-Mail: {EMail}");
