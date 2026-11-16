@@ -12,14 +12,15 @@ class Program
     {
         PosetilacDAO posetilac = new PosetilacDAO();
         KupovinaDAO kupovina = new KupovinaDAO();
-        IzdavacDAO izdavac = new IzdavacDAO();
+      
 
         AdresaDAO adresa = new AdresaDAO(); 
         AutorDAO autor = new AutorDAO();
         KnjigaDAO knjiga = new KnjigaDAO();
         AutorKnjigaDAO autorKnjiga = new AutorKnjigaDAO();
+        IzdavacDAO izdavac = new IzdavacDAO(knjiga, autor);
 
-        SajamConsoleView view = new SajamConsoleView(posetilac,kupovina,izdavac);
+        SajamConsoleView view = new SajamConsoleView(posetilac,kupovina,izdavac,knjiga);
         AutorKnjigaConsoleView autoriView = new AutorKnjigaConsoleView(autor, adresa, knjiga, autorKnjiga, izdavac);
 
         while (true)
