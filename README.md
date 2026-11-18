@@ -14,7 +14,7 @@ Projektni zadatak iz predmeta Osnovi informacionih sistema i softverskog inženj
 * **DAO klase:** AdresaDAO, AutorDAO, KnjigaDAO, AutorKnjigaDAO
 * **Konzolni prikaz:** AutorKnjigaConsoleView (prikaz, dodavanje, izmena i brisanje autora i adresa, prikaz, dodavanje, izmena i brisanje knjiga) — povezivanje autora sa adresom i knjigama posle učitavanja iz fajlova
 * **Deljeni deo:** Program.cs
-
+```
 ## Struktura projekta
 
 sajam_knjiga/
