@@ -5,7 +5,8 @@ Projektni zadatak iz predmeta Osnovi informacionih sistema i softverskog inženj
 ## Student 1 - Helena Lazić
 * **Entiteti:** Posetilac, Kupovina, Izdavac
 * **DAO klase:** PosetilacDAO, KupovinaDAO, IzdavacDAO
-* **Konzolni prikaz:** SajamConsoleView (prikaz, dodavanje, izmena i brisanje posetilaca, kupovina i izdavaca)
+* **Konzolni prikaz:** PosetilacConsoleView, (prikaz, dodavanje, izmena i brisanje posetilaca)
+  KupovinaConsoleView (prikaz, dodavanje, izmena i brisanje kupovina) i IzdavaciConsoleView (prikaz, dodavanje, izmena i brisanje izdavaca)
 * **Deljeni deo:** Storage, Serializer, interfejs ISerijalizacija, Program.cs
 
 ## Student 2 - Emilija Milojević
@@ -16,13 +17,56 @@ Projektni zadatak iz predmeta Osnovi informacionih sistema i softverskog inženj
 
 ## Struktura projekta
 
-```text
 sajam_knjiga/
-├── Core/ zajednički sloj (modeli, pristup podacima)
-│   ├── Models/ Adresa, Autor, Knjiga, AutorKnjiga, Posetilac, Kupovina, Izdavac
-│   ├── DAO/ klase za pristup podacima (po jedna po entitetu)
-│   ├── Interfaces/ ISerijalizacija
-│   ├── Services/ Storage (čitanje i upis fajlova)
-│   ├── Utils/ Serializer i pomoćne klase
-│   └── Data/ CSV fajlovi sa podacima
-└── Console/ konzolna aplikacija i meniji
+│
+├── Core/
+│   │
+│   ├── Models/
+│   │   ├── Adresa.cs
+│   │   ├── Autor.cs
+│   │   ├── Knjiga.cs
+│   │   ├── AutorKnjiga.cs
+│   │   ├── Posetilac.cs
+│   │   ├── Kupovina.cs
+│   │   └── Izdavac.cs
+│   │
+│   ├── DAO/
+│   │   ├── AdresaDAO.cs
+│   │   ├── AutorDAO.cs
+│   │   ├── KnjigaDAO.cs
+│   │   ├── AutorKnjigaDAO.cs
+│   │   ├── PosetilacDAO.cs
+│   │   ├── KupovinaDAO.cs
+│   │   └── IzdavacDAO.cs
+│   │
+│   ├── Interfaces/
+│   │   └── ISerijalizacija.cs
+│   │
+│   ├── Services/
+│   │   ├── Storage.cs
+│   │   ├── PosetilacService.cs
+│   │   ├── KupovinaService.cs
+│   │   └── IzdavacService.cs
+│   │
+│   ├── Utils/ 
+|   |   Serializer.cs 
+│   │   
+│   └── Data/
+│       ├── adrese.csv
+│       ├── autori.csv
+│       ├── knjige.csv
+│       ├── autor_knjiga.csv
+│       ├── posetioci.csv
+│       ├── kupovine.csv
+│       └── izdavaci.csv
+│
+└── Console/
+    │
+    ├── Program.cs
+    │
+    └── ConsoleUI/
+        ├── PosetilacConsoleView.cs
+        ├── KupovinaConsoleView.cs
+        ├── IzdavaciConsoleView.cs
+        ├── AutorKnjigaConsoleView.cs
+        └── ConsoleViewUtils.cs
