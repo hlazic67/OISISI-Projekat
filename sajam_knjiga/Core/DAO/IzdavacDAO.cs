@@ -1,8 +1,8 @@
 ﻿using Core.Models;
-using Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Core.Services;
 
 namespace Core.DAO
 {
@@ -11,33 +11,21 @@ namespace Core.DAO
         private List<Izdavac> _izdavaci;
         private Storage<Izdavac> _storage;
 
-        private KnjigaDAO _knjigaDAO;
-        private AutorDAO _autorDAO;
 
 
-        public IzdavacDAO(KnjigaDAO knjigaDAO, AutorDAO autorDAO)
-        {
-            _knjigaDAO = knjigaDAO;
-            _autorDAO = autorDAO;
-
+        public IzdavacDAO()
+        { 
             _storage = new Storage<Izdavac>("izdavaci.csv");
             _izdavaci = _storage.Load();
         }
 
-        public Izdavac DodajIzdavaca(Izdavac izdavac)
+      public Izdavac DodajIzdavaca(Izdavac izdavac)
         {
             izdavac.Sifra = GenerisiSifru();
 
-            Knjiga? knjiga = _knjigaDAO.GetKnjigaByIsbn("978-03");
-            if (knjiga != null)
-              izdavac.SpisakKnjiga.Add(knjiga);
-
-            Autor? autor = _autorDAO.GetAutorById(1);
-            if (autor != null)
-                izdavac.SpisakAutora.Add(autor);
-
             _izdavaci.Add(izdavac);
             _storage.Save(_izdavaci);
+
             return izdavac;
         }
 
