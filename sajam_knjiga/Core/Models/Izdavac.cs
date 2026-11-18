@@ -12,7 +12,7 @@ namespace Core.Models
 
         public string Naziv {  get; set; }
 
-        public Autor SefIzdavaca { get; set; }
+        public Autor? SefIzdavaca { get; set; }
 
         public List<Autor> SpisakAutora {  get; set; }
 
