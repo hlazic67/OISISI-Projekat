@@ -5,6 +5,7 @@ Projektni zadatak iz predmeta Osnovi informacionih sistema i softverskog inženj
 ## Student 1 - Helena Lazić
 * **Entiteti:** Posetilac, Kupovina, Izdavac
 * **DAO klase:** PosetilacDAO, KupovinaDAO, IzdavacDAO
+* **Servisi:** PosetilacService, KupovinaService, IzdavacService
 * **Konzolni prikaz:** PosetilacConsoleView, (prikaz, dodavanje, izmena i brisanje posetilaca)
   KupovinaConsoleView (prikaz, dodavanje, izmena i brisanje kupovina) i IzdavaciConsoleView (prikaz, dodavanje, izmena i brisanje izdavaca)
 * **Deljeni deo:** Storage, Serializer, interfejs ISerijalizacija, Program.cs
@@ -12,7 +13,8 @@ Projektni zadatak iz predmeta Osnovi informacionih sistema i softverskog inženj
 ## Student 2 - Emilija Milojević
 * **Entiteti:** Adresa, Autor, Knjiga, kao i spojna klasa AutorKnjiga za vezu autor-knjiga
 * **DAO klase:** AdresaDAO, AutorDAO, KnjigaDAO, AutorKnjigaDAO
-* **Konzolni prikaz:** AutorKnjigaConsoleView (prikaz, dodavanje, izmena i brisanje autora i adresa, prikaz, dodavanje, izmena i brisanje knjiga) — povezivanje autora sa adresom i knjigama posle učitavanja iz fajlova
+* **Servisi:** AdresaService, AutorService, KnjigaService(povezivanje autora sa adresom i knjigama posle učitavanja iz fajlova, provere i brisanje uz vođenje računa o referencijalnim zavisnostima)
+* **Konzolni prikaz:** AutorConsoleView(prikaz, dodavanje, izmena i brisanje autora), KnjigaConsoleView(prikaz, dodavanje, izmena i brisanje knjiga) i AdresaConsoleView(prikaz, dodavanje, izmena i brisanje adresa)
 * **Deljeni deo:** Program.cs
 ```
 ## Struktura projekta
@@ -44,9 +46,13 @@ sajam_knjiga/
 │   │
 │   ├── Services/
 │   │   ├── Storage.cs
+|   |   ├── AdresaService.cs
+│   │   ├── AutorService.cs
+│   │   ├── KnjigaService.cs
 │   │   ├── PosetilacService.cs
 │   │   ├── KupovinaService.cs
 │   │   └── IzdavacService.cs
+
 │   │
 │   ├── Utils/ 
 |   |   Serializer.cs 
@@ -68,5 +74,7 @@ sajam_knjiga/
         ├── PosetilacConsoleView.cs
         ├── KupovinaConsoleView.cs
         ├── IzdavaciConsoleView.cs
-        ├── AutorKnjigaConsoleView.cs
+        ├── AutorConsoleView.cs
+        ├── KnjigaConsoleView.cs
+        ├── AdresaConsoleView.cs
         └── ConsoleViewUtils.cs
