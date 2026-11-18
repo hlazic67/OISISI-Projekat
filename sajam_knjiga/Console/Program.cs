@@ -29,7 +29,6 @@ class Program
 
         IzdavaciConsoleView izdavaciView =new IzdavaciConsoleView(izdavac, autor, knjiga, autorKnjiga, izdavacService);
 
-        AutorKnjigaConsoleView autoriView = new AutorKnjigaConsoleView(autor, adresa, knjiga, autorKnjiga, izdavac);
 
         while (true)
         {
@@ -57,9 +56,9 @@ class Program
                     izdavaciView.RunIzdavaciMenu();
                     break;
 
-                case "4":
-                    autoriView.RunMenu();
-                    break;
+                //case "4":
+                //    autoriView.RunMenu();
+                //    break;
 
                 default:
                     System.Console.WriteLine("Nepostojeca opcija.");
