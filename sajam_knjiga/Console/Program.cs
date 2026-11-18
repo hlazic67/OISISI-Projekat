@@ -23,13 +23,19 @@ class Program
         KupovinaService kupovinaService = new KupovinaService(kupovina, posetilac, knjiga);
         IzdavacService izdavacService = new IzdavacService(izdavac, autor);
 
+        AdresaService adresaService = new AdresaService(adresa, autor);
+        AutorService autorService = new AutorService(autor, adresa, knjiga, autorKnjiga, izdavac);
+        KnjigaService knjigaService = new KnjigaService(knjiga, autorKnjiga, izdavac);
+
+        autorService.PoveziPodatke();
+
         PosetilacConsoleView posetiociView =new PosetilacConsoleView(posetilac, kupovina, knjiga, posetilacService);
-
         KupovinaConsoleView kupovineView = new KupovinaConsoleView(kupovina, posetilac, knjiga, kupovinaService);
-
         IzdavaciConsoleView izdavaciView =new IzdavaciConsoleView(izdavac, autor, knjiga, autorKnjiga, izdavacService);
 
-        AutorKnjigaConsoleView autoriView = new AutorKnjigaConsoleView(autor, adresa, knjiga, autorKnjiga, izdavac);
+        AutorConsoleView autoriView = new AutorConsoleView(autorService);
+        KnjigaConsoleView knjigeView = new KnjigaConsoleView(knjigaService);
+        AdresaConsoleView adreseView = new AdresaConsoleView(adresaService);
 
         while (true)
         {
@@ -37,7 +43,9 @@ class Program
             System.Console.WriteLine("1: Posetioci");
             System.Console.WriteLine("2: Kupovine");
             System.Console.WriteLine("3: Izdavaci");
-            System.Console.WriteLine("4: Autori, knjige i adrese");
+            System.Console.WriteLine("4: Autori");
+            System.Console.WriteLine("5: Knjige");
+            System.Console.WriteLine("6: Adrese");
             System.Console.WriteLine("0: Izlaz");
 
             string userInput = System.Console.ReadLine() ?? "0";
@@ -59,6 +67,14 @@ class Program
 
                 case "4":
                     autoriView.RunMenu();
+                    break;
+
+                case "5":
+                    knjigeView.RunMenu();
+                    break;
+
+                case "6":
+                    adreseView.RunMenu();
                     break;
 
                 default:
