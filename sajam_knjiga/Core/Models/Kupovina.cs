@@ -36,7 +36,6 @@ namespace Core.Models
             if (ocena < 1 || ocena > 5)
                 throw new ArgumentOutOfRangeException(nameof(ocena), "Ocena mora biti između 1 i 5.");
             Ocena = ocena;
-            Ocena = ocena;
             Komentar = kom;
 
             Posetilac = null;
@@ -84,7 +83,6 @@ namespace Core.Models
             PosetilacBrojClanskeKarte = values[0];
             KnjigaISBN = values[1];
             DatumKupovine = DateOnly.ParseExact(values[2], "yyyy-MM-dd");
-            Ocena = int.Parse(values[3]);
             Ocena = int.Parse(values[3]);
             if (Ocena < 1 || Ocena > 5)
                 throw new FormatException("Ocena mora biti između 1 i 5.");
